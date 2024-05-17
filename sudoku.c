@@ -44,8 +44,48 @@ void print_node(Node* n){
 }
 
 int is_valid(Node* n){
-
-    return 1;
+   //No se repitan números en las filas
+   for(int i = 0; i < 9; i++){
+      int fila[10] = {0};
+      for(int j = 0; j < 9; j++){
+         if(n->sudo[i][j] != 0){
+            if(fila[n->sudo[i][j]] == 1){
+               return 0;
+            }
+            fila[n->sudo[i][j]] = 1;
+         }
+      }
+   }
+   //No se repitan números en las columnas
+   for(int i = 0; i < 9; i++){
+      int columna[10] = {0};
+      for(int j = 0; j < 9; j++){
+         if(n->sudo[j][i] != 0){
+            if(columna[n->sudo[j][i]] == 1){
+               return 0;
+            }
+            columna[n->sudo[j][i]] = 1;
+         }
+      }
+   }
+   //No se repitan números en las submatrices
+   for(int i = 0; i < 9; i++){
+      int subMatriz[10] = {0};
+      int iniciarFila = (i/3)  * 3;
+      int iniciarColumna = (i%3) * 3;
+      for(int j = 0; j < 3; j++){
+         for(int k = 0; k < 3; k++){
+            if(n->sudo[iniciarFila + j][iniciarColumna + k] != 0){
+               if(subMatriz[n->sudo[iniciarFila + j][iniciarColumna + k] != 0]){
+                  if(subMatriz[n->sudo[iniciarFila + j][iniciarColumna + k]] == 1)
+                  return 0;
+               }
+               subMatriz[n->sudo[iniciarFila + j][iniciarColumna + k]] = 1;
+            }
+         }
+      }
+   }
+   return 1;
 }
 
 
