@@ -14,3 +14,17 @@ Fri 17 May 2024 08:36:18 PM UTC:
  tests:  3|4
 total_score: 20/70
 b6d8f53
+Fri 17 May 2024 08:41:06 PM UTC: 
+ sudoku.c | 19 ++++++++++---------
+ 1 file changed, 10 insertions(+), 9 deletions(-)
+In file included from test.c:5:
+sudoku.c: In function ‘get_adj_nodes’:
+sudoku.c:94:10: error: unused variable ‘j’ [-Werror=unused-variable]
+   94 |    int i,j;
+      |          ^
+sudoku.c:94:8: error: unused variable ‘i’ [-Werror=unused-variable]
+   94 |    int i,j;
+      |        ^
+cc1: all warnings being treated as errors
+Compilation failed
+4970da6
