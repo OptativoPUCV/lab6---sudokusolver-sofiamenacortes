@@ -45,34 +45,34 @@ void print_node(Node* n){
 
 int is_valid(Node* n){
    for(int i = 0; i < 9; i++){
-      int* col = (int*) calloc(10, sizeof(int));
-      int* row = (int*) calloc(10, sizeof(int));
+      int* columna = (int*) calloc(10, sizeof(int));
+      int* fila = (int*) calloc(10, sizeof(int));
       for(int j = 0; j < 9; j++){
          if(n->sudo[i][j] != 0){
-            if(col[n->sudo[i][j]] == 1){
+            if(columna[n->sudo[i][j]] == 1){
                return 0;
             }
-            col[n->sudo[i][j]] = 1;
+            columna[n->sudo[i][j]] = 1;
          }
          if(n->sudo[i][j] != 0){
-            if(row[n->sudo[i][j]] == 1){
+            if(fila[n->sudo[i][j]] == 1){
                return 0;
             }
-            row[n->sudo[i][j]] = 1;
+            fila[n->sudo[i][j]] = 1;
          }
       }
    }
    int k = 0;
    while(k < 9){
-      int* box = (int*) calloc(10, sizeof(int));
+      int* cuadrante = (int*) calloc(10, sizeof(int));
       for(int i = 0; i < 9; i++){
          int x = 3* (k/3) + (i/3);
          int y = 3* (k%3) + (i%3);
          if(n->sudo[x][y] != 0){
-           if(box[n->sudo[x][y]] == 1){
+           if(cuadrante[n->sudo[x][y]] == 1){
               return 0;
            }
-             box[n->sudo[x][y]] = 1;
+             cuadrante[n->sudo[x][y]] = 1;
          }
       }
       k++;
@@ -123,6 +123,7 @@ Node* DFS(Node* initial, int* cont){
    while (get_size(stack) != 0){
       Node* n = top(stack);
       pop(stack);
+
       
       if (is_final(n)){
          return n;
