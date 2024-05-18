@@ -123,7 +123,6 @@ Node* DFS(Node* initial, int* cont){
    while (get_size(stack) != 0){
       Node* n = top(stack);
       pop(stack);
-      (*cont)++;
       
       if (is_final(n)){
          return n;
