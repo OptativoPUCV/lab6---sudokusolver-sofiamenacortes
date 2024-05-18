@@ -54,11 +54,11 @@ int is_valid(Node* n){
             }
             columna[n->sudo[i][j]] = 1;
          }
-         if(n->sudo[i][j] != 0){
-            if(fila[n->sudo[i][j]] == 1){
+         if(n->sudo[j][i] != 0){
+            if(fila[n->sudo[j][i]] == 1){
                return 0;
             }
-            fila[n->sudo[i][j]] = 1;
+            fila[n->sudo[j][i]] = 1;
          }
       }
    }
