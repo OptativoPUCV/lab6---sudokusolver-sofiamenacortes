@@ -45,34 +45,34 @@ void print_node(Node* n){
 
 int is_valid(Node* n){
    for(int i = 0; i < 9; i++){
-      int* columna = (int*) calloc(10, sizeof(int));
-      int* fila = (int*) calloc(10, sizeof(int));
+      int* col = (int*) calloc(10, sizeof(int));
+      int* row = (int*) calloc(10, sizeof(int));
       for(int j = 0; j < 9; j++){
          if(n->sudo[i][j] != 0){
-            if(columna[n->sudo[i][j]] == 1){
+            if(col[n->sudo[i][j]] == 1){
                return 0;
             }
-            columna[n->sudo[i][j]] = 1;
+            col[n->sudo[i][j]] = 1;
          }
          if(n->sudo[i][j] != 0){
-            if(fila[n->sudo[i][j]] == 1){
+            if(row[n->sudo[i][j]] == 1){
                return 0;
             }
-            fila[n->sudo[i][j]] = 1;
+            row[n->sudo[i][j]] = 1;
          }
       }
    }
    int k = 0;
    while(k < 9){
-      int* cuadrante = (int*) calloc(10, sizeof(int));
+      int* box = (int*) calloc(10, sizeof(int));
       for(int i = 0; i < 9; i++){
          int x = 3* (k/3) + (i/3);
          int y = 3* (k%3) + (i%3);
          if(n->sudo[x][y] != 0){
-           if(cuadrante[n->sudo[x][y]] == 1){
+           if(box[n->sudo[x][y]] == 1){
               return 0;
            }
-             cuadrante[n->sudo[x][y]] = 1;
+             box[n->sudo[x][y]] = 1;
          }
       }
       k++;
