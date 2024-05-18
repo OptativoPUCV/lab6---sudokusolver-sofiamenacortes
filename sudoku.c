@@ -44,10 +44,16 @@ void print_node(Node* n){
 }
 
 int is_valid(Node* n){
-   //No se repitan números en las filas
    for(int i = 0; i < 9; i++){
-      int fila[10] = {0};
+      int* columna = (int*) calloc(10, sizeof(int));
+      int* fila = (int*) calloc(10, sizeof(int));
       for(int j = 0; j < 9; j++){
+         if(n->sudo[i][j] != 0){
+            if(columna[n->sudo[i][j]] == 1){
+               return 0;
+            }
+            columna[n->sudo[i][j]] = 1;
+         }
          if(n->sudo[i][j] != 0){
             if(fila[n->sudo[i][j]] == 1){
                return 0;
@@ -56,36 +62,23 @@ int is_valid(Node* n){
          }
       }
    }
-   //No se repitan números en las columnas
-   for(int i = 0; i < 9; i++){
-      int columna[10] = {0};
-      for(int j = 0; j < 9; j++){
-         if(n->sudo[j][i] != 0){
-            if(columna[n->sudo[j][i]] == 1){
-               return 0;
-            }
-            columna[n->sudo[j][i]] = 1;
+   int k = 0;
+   while(k < 9){
+      int* cuadrante = (int*) calloc(10, sizeof(int));
+      for(int i = 0; i < 9; i++){
+         int x = 3* (k/3) + (i/3);
+         int y = 3* (k%3) + (i%3);
+         if(n->sudo[x][y] != 0){
+           if(cuadrante[n->sudo[x][y]] == 1){
+              return 0;
+           }
+             cuadrante[n->sudo[x][y]] = 1;
          }
       }
-   }
-   //No se repitan números en las submatrices
-   for(int i = 0; i < 9; i++){
-      int subMatriz[10] = {0};
-      int iniciarFila = (i/3)  * 3;
-      int iniciarColumna = (i%3) * 3;
-      for(int j = 0; j < 3; j++){
-         for(int k = 0; k < 3; k++){
-            if(n->sudo[iniciarFila + j][iniciarColumna + k] != 0){
-               if(subMatriz[n->sudo[iniciarFila + j][iniciarColumna + k] != 0]){
-                  if(subMatriz[n->sudo[iniciarFila + j][iniciarColumna + k]] == 1)
-                  return 0;
-               }
-               subMatriz[n->sudo[iniciarFila + j][iniciarColumna + k]] = 1;
-            }
-         }
-      }
+      k++;
    }
    return 1;
+  
 }
 
 
@@ -146,6 +139,7 @@ Node* DFS(Node* initial, int* cont){
    
   return NULL;
 }
+
 
 
 /*
