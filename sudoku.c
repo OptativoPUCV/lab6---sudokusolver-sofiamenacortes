@@ -90,30 +90,27 @@ int is_valid(Node* n){
 
 
 List* get_adj_nodes(Node* n){
-    List* list=createList();
+   List* list = createList();
 
-   for (int i = 0; i < 9; i++) {
-           for (int j = 0; j < 9; j++) {
-               if (n->sudo[i][j] == 0) {
-                   // Probar todos los números del 1 al 9
-                   for (int num = 1; num <= 9; num++) {
-                       Node* newNode = copy(n);
-                       newNode->sudo[i][j] = num;
-                       if (is_valid(newNode)) {
-                           pushBack(list, newNode);
-                       } else {
-                           free(newNode); // Liberar memoria si el nodo no es válido
-                       }
-                   }
-                   // Solo necesitamos generar nodos para la primera celda vacía encontrada
-                   return list;
+   for(int i = 0; i < 9; i++){
+      for(int j = 0; j < 9; j++){
+         if(n->sudo[i][j] == 0){
+            //se prueban los numeros del 1 al 9
+            for(int num = 1; num <= 9; num++){
+               Node* aux = copy(n);
+               aux->sudo[i][j] = num;
+               if(is_valid(aux)){
+                  pushBack(list, aux);
+               } else{
+                  free(aux);
                }
-           }
-       }
-
-       return list;
+            }
+            return list;
+         }
+      }
+   }
+   return list;    
 }
-
 
 
 int is_final(Node* n){
@@ -149,7 +146,6 @@ Node* DFS(Node* initial, int* cont){
    
   return NULL;
 }
-
 
 
 /*
