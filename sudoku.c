@@ -88,17 +88,15 @@ List* get_adj_nodes(Node* n){
    for(int i = 0; i < 9; i++){
       for(int j = 0; j < 9; j++){
          if(n->sudo[i][j] == 0){
-            //se prueban los numeros del 1 al 9
-            for(int num = 1; num <= 9; num++){
-               Node* aux = copy(n);
-               aux->sudo[i][j] = num;
-               if(is_valid(aux)){
-                  pushBack(list, aux);
-               } else{
-                  free(aux);
+            int k = 1;
+            while(k != 10){
+               n->sudo[i][j] = k;
+               Node* adj = copy(n);
+               if(is_valid(adj)){
+                  pushBack(list, adj);
                }
-            }
-            return list;
+               k++;
+            }   
          }
       }
    }
